@@ -91,7 +91,6 @@ int main() {
         cin >> n >> m;
         cout << "n:" << n << " m:" << m << endl;
 
-        
         vector<vector<int>> aulas(n, vector<int>(m));
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++){
