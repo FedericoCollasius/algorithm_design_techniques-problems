@@ -1,0 +1,11 @@
+# Track only sources + tests + tooling. Compiled binaries (no extension)
+# fall through and stay ignored, whatever their name.
+*
+!*/
+!*.cpp
+!*.h
+!*.in
+!*.out
+!Makefile
+!.gitignore
+!README.md
