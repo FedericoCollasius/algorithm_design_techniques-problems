@@ -87,3 +87,45 @@ int main() {
 
   return 0;
 }
+
+/*
+Solución alternativa (profundidad memoizada)
+
+Idea: "A es superior de B" = A es ancestro de B en el bosque de reventa. En una
+cadena raíz -> ... -> hoja, todos son superiores de los que están debajo, así
+que TODOS van en mesas distintas: hacen falta al menos tantas mesas como la
+cadena más larga. Y alcanza: sentar a cada socio en la mesa = su profundidad
+nunca junta a un ancestro con su descendiente (tienen profundidades distintas).
+Entonces mesas mínimas = longitud de la cadena de superiores más larga =
+altura del bosque.
+
+profundidad(v) = 1 si v no tiene revendedor, si no 1 + profundidad(padre). Se
+memoiza siguiendo el puntero al padre. O(n).
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n;
+vector<int> padre, prof;
+
+int profundidad(int v) {
+    if (prof[v]) return prof[v];                       // ya calculada
+    prof[v] = (padre[v] == -1) ? 1 : profundidad(padre[v]) + 1;
+    return prof[v];
+}
+
+int main() {
+    cin >> n;
+    padre.assign(n + 1, 0);
+    prof.assign(n + 1, 0);
+    for (int i = 1; i <= n; i++) cin >> padre[i];      // -1 si no tiene revendedor
+
+    int res = 0;
+    for (int i = 1; i <= n; i++)
+        res = max(res, profundidad(i));
+
+    cout << res << endl;
+    return 0;
+}
+*/
