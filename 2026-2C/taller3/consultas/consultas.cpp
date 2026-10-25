@@ -1,24 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <utility>
 using namespace std;
 
 int consulta(vector<long long>& T, int n) {
   sort(T.begin(), T.end(), [](long long a, long long b){ return a < b;});
   int res = n;
-  int cnt = T[0];
+  long long cnt = T[0];
   for (int i = 1; i < n; i++){
     if(T[i] < cnt) {
-      int j;
-      for(j = i+1; j < n && T[j] < cnt; j++);
-      if (j < n){
-        swap(T[i], T[j]);
-      } else {
-        res--;
-      }
+      res--;
+    } else {
+      cnt += T[i];
     }
-    cnt += T[i];
   }
   /*
   for (long long num : T) {
